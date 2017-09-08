@@ -79,9 +79,9 @@ class CandidatesList extends Component {
     const {navigate} = this.props.navigation;
     console.log("The render props includek",navigate);
     //console.log("This is render navigate", this.props);
-    const onCandidatePress=()=>{
+    const onCandidatePress=(candidate)=>{
 
-          navigate('CandidatePreview')
+          navigate('CandidatePreview',{ canditate: candidate })
 
           //this.props.candidatePreviewNavigate(navigate);
     }
@@ -92,7 +92,7 @@ class CandidatesList extends Component {
           enableEmptySections
           dataSource={this.dataSource}
           renderRow={
-            (candidate, navigate)=> <ListItem onPress={onCandidatePress()} candidate={candidate}/>
+            (candidate, navigate)=> <ListItem onPress={onCandidatePress} candidate={candidate}/>
 
           }
         />
