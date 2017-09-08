@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {candidateUpdate, candidateCreate} from '../actions'
 
 
+
 class CandidatesPreview extends Component {
   static navigationOptions = ({navigation}) => {
     const {navigate} = navigation;
@@ -24,38 +25,42 @@ class CandidatesPreview extends Component {
 
   render() {
 
+    const { params } = this.props.navigation.state;
+    console.log("The params are",params);
+
     return (
+
       <View>
         <ScrollView style={{alignSelf: 'stretch'}}>
           <Text style={{alignSelf: 'center', paddingTop: 10, color: "#206C97", fontSize: 18}}>
             Candidate's details
           </Text>
           <PreviewText title="Surname and Name"
-                       value="Kowalski Jan"
+                       value={params.candidate.name}
           />
           <PreviewText title="Email"
                        placeholder="example@mail.com"
-                       value={this.props.email}
+                       value={params.candidate.email}
                        onChangeText={text => this.props.candidateUpdate({prop: 'email', value: text})}
           />
           <PreviewText title="Education"
                        placeholder="Education"
-                       value={this.props.education}
+                       value={params.candidate.education}
                        onChangeText={text => this.props.candidateUpdate({prop: 'education', value: text})}
           />
           <PreviewText title="Level"
                        placeholder="Junior"
-                       value={this.props.level}
+                       value={params.candidate.level}
                        onChangeText={text => this.props.candidateUpdate({prop: 'level', value: text})}
           />
           <PreviewText title="Years in JS"
                        placeholder="0-1"
-                       value={this.props.jsyears}
+                       value={params.candidate.jsyears}
                        onChangeText={text => this.props.candidateUpdate({prop: 'jsyears', value: text})}
           />
           <PreviewText title="Years in Front-End"
                        placeholder="0-1"
-                       value={this.props.feyears}
+                       value={params.candidate.feyears}
                        onChangeText={text => this.props.candidateUpdate({prop: 'feyears', value: text})}
           />
           <PreviewHyperlink title="Github Link"
@@ -64,52 +69,52 @@ class CandidatesPreview extends Component {
           />
           <PreviewText title="Skills"
                        placeholder="Candidate's skills"
-                       value={this.props.skills}
+                       value={params.candidate.skills}
                        onChangeText={text => this.props.candidateUpdate({prop: 'skills', value: text})}
           />
           <PreviewText title="Project Description"
                        placeholder="Description"
-                       value={this.props.project}
+                       value={params.candidate.project}
                        onChangeText={text => this.props.candidateUpdate({prop: 'project', value: text})}
           />
           <PreviewText title="Notice"
                        placeholder="2 weeks"
-                       value={this.props.notice}
+                       value={params.candidate.notice}
                        onChangeText={text => this.props.candidateUpdate({prop: 'notice', value: text})}
           />
           <PreviewText title="Timezone"
                        placeholder="UTC"
-                       value={this.props.zone}
+                       value={params.candidate.zone}
                        onChangeText={text => this.props.candidateUpdate({prop: 'zone', value: text})}
           />
           <PreviewText title="Based in"
                        placeholder="San Francisco"
-                       value={this.props.based}
+                       value={params.candidate.based}
                        onChangeText={text => this.props.candidateUpdate({prop: 'based', value: text})}
           />
           <PreviewText title="Current Position"
                        placeholder="Programmer"
-                       value={this.props.current}
+                       value={params.candidate.current}
                        onChangeText={text => this.props.candidateUpdate({prop: 'current', value: text})}
           />
           <PreviewText title="Salary Expectation"
                        placeholder="10,000.00 EUR"
-                       value={this.props.salary}
+                       value={params.candidate.salary}
                        onChangeText={text => this.props.candidateUpdate({prop: 'salary', value: text})}
           />
           <PreviewText title="How got to know Aurity?"
                        placeholder="Google"
-                       value={this.props.whereaurity}
+                       value={params.candidate.whereaurity}
                        onChangeText={text => this.props.candidateUpdate({prop: 'whereaurity', value: text})}
           />
           <PreviewText title="Online Courses"
                        placeholder="udemy"
-                       value={this.props.courses}
+                       value={params.candidate.courses}
                        onChangeText={text => this.props.candidateUpdate({prop: 'courses', value: text})}
           />
           <PreviewText title="Details"
                        placeholder="Details"
-                       value={this.props.details}
+                       value={params.candidate.details}
                        onChangeText={text => this.props.candidateUpdate({prop: 'details', value: text})}
           />
 

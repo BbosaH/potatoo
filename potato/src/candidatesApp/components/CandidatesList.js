@@ -71,6 +71,8 @@ class CandidatesList extends Component {
   //   return <ListItemRedux onPress={()=>{onCandidatePress()}} candidate={candidate}/>;
   // }
 
+
+
   render() {
 
   // yes i put render row inside component
@@ -78,13 +80,16 @@ class CandidatesList extends Component {
   // no
     const {navigate} = this.props.navigation;
     console.log("The render props includek",navigate);
-    //console.log("This is render navigate", this.props);
-    const onCandidatePress=(candidate)=>{
+    console.log("This is properries", this.props);
 
-          navigate('CandidatePreview',{ canditate: candidate })
+    const goTo=(candidate)=>{
 
-          //this.props.candidatePreviewNavigate(navigate);
+          navigate('CandidatePreview',{candidate})
+
     }
+
+
+
 
     return (
       <View>
@@ -92,7 +97,7 @@ class CandidatesList extends Component {
           enableEmptySections
           dataSource={this.dataSource}
           renderRow={
-            (candidate, navigate)=> <ListItem onPress={onCandidatePress} candidate={candidate}/>
+            (candidate,navigate)=> <ListItem candidate={candidate} navigate={navigate} func={goTo}/>
 
           }
         />

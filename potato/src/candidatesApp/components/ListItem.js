@@ -9,13 +9,22 @@ import {Text, View, TouchableWithoutFeedback} from 'react-native';
 class ListItem extends Component {
   // onRowPress() {
   //   this.props.navigation.navigate('CandidatePreview')
-  // }
+  //
+
 
   render() {
     const {name, status, level, salary} = this.props.candidate;
 
+    onCPress=(candidate)=>{
+
+          console.log("The candidate=>",candidate);
+          this.props.func(candidate);
+
+    }
+
+
     return (
-      <TouchableWithoutFeedback onPress={this.props.onPress}>
+      <TouchableWithoutFeedback onPress={()=>{onCPress(this.props.candidate)}}>
         <View>
           <View style={styles.containerStyle}>
             <Text style={styles.titleStyle}>
