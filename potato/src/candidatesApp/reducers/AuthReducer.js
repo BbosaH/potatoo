@@ -1,4 +1,16 @@
 /**
+ * @Author: Henry Bbosa <magicwand>
+ * @Date:   2017-09-06T15:14:07+03:00
+ * @Email:  bbosa.henry1@gmail.com
+ * @Project: potato
+ * @Filename: AuthReducer.js
+ * @Last modified by:   magicwand
+ * @Last modified time: 2017-09-10T14:10:32+03:00
+ */
+
+
+
+/**
  * Created by Lena on 08.08.2017.
  */
 import {
@@ -11,7 +23,7 @@ import {
   REGISTRATION_USER_SUCCESS,
   REGISTRATION_USER_FAIL
 }
-  from '../actions/types'
+  from '../settings/settings'
 
 const INITIAL_STATE = {
   email   : '',

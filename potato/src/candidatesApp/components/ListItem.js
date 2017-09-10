@@ -13,6 +13,7 @@ class ListItem extends Component {
 
 
   render() {
+
     const {name, status, level, salary} = this.props.candidate;
 
     onCPress=(candidate)=>{

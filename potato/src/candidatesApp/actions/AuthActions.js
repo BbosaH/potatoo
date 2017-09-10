@@ -1,4 +1,16 @@
 /**
+ * @Author: Henry Bbosa <magicwand>
+ * @Date:   2017-09-06T15:14:07+03:00
+ * @Email:  bbosa.henry1@gmail.com
+ * @Project: potato
+ * @Filename: AuthActions.js
+ * @Last modified by:   magicwand
+ * @Last modified time: 2017-09-10T15:37:20+03:00
+ */
+
+
+
+/**
  * Created by Lena on 08.08.2017.
  */
 import {
@@ -10,7 +22,7 @@ import {
   REGISTER_USER,
   REGISTRATION_USER_FAIL
 }
-  from './types'
+  from '../settings/settings'
 
 import firebase from 'firebase'
 
@@ -34,6 +46,8 @@ function navigateToNextPage(navigate) {
 }
 
 export const loginUser = ({email, password, navigate}) => {
+  console.log("The email is ==>",email);
+  console.log("The email is ==>",password);
   console.log("The navigate is ==>",navigate);
   return (dispatch) => {
     dispatch({type: LOGIN_USER});
@@ -45,6 +59,7 @@ export const loginUser = ({email, password, navigate}) => {
 };
 
 const loginUserSuccess = (dispatch, user, navigate) => {
+  console.log("The user brought => " ,user);
   dispatch({
     type   : LOGIN_USER_SUCCESS,
     payload: user
