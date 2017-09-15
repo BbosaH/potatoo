@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesList.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T08:07:51+03:00
+ * @Last modified time: 2017-09-14T23:02:26+03:00
  */
 
 
@@ -16,6 +16,7 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
 import {Text, View, Button, ListView} from 'react-native';
+import {List} from 'react-native-elements'
 import {connect} from 'react-redux';
 import {candidatesFetch, candidatePreviewNavigate} from '../actions/CandidatesActions';
 //import {ListItem} from '../common'
@@ -108,14 +109,16 @@ class CandidatesList extends Component {
 
     return (
       <View>
-        <ListView
-          enableEmptySections
-          dataSource={this.dataSource}
-          renderRow={
-            (candidate)=> <ListItem candidate={candidate} func={goTo}/>
+        <List>
+          <ListView
+            enableEmptySections
+            dataSource={this.dataSource}
+            renderRow={
+              (candidate)=> <ListItem candidate={candidate} func={goTo}/>
 
-          }
-        />
+            }
+          />
+        </List>
         <View style={{margin: 10}}>
           <Button title="Add new Candidate"
                   onPress={() => navigate('CandidatesForm')}/>

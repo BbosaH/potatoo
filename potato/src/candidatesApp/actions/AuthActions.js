@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: AuthActions.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T15:37:20+03:00
+ * @Last modified time: 2017-09-12T19:27:09+03:00
  */
 
 
@@ -54,6 +54,7 @@ export const loginUser = ({email, password, navigate}) => {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
             .then(user => loginUserSuccess(dispatch, user, navigate))
+            //.catch((error) => {console.log("The error :" ,error)});
             .catch(() => loginUserFail(dispatch));
   };
 };

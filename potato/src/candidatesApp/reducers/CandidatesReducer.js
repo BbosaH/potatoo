@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesReducer.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T14:10:05+03:00
+ * @Last modified time: 2017-09-15T16:08:23+03:00
  */
 
 
@@ -39,6 +39,7 @@ INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CANDIDATE_UPDATE:
+      console.log("The state is =>",state);
       return {...state, [action.payload.prop]: action.payload.value};
     case CANDIDATE_CREATE:
       return INITIAL_STATE;

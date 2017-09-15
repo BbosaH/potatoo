@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: RegisterForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T13:55:24+03:00
+ * @Last modified time: 2017-09-14T22:09:00+03:00
  */
 
 
@@ -15,10 +15,11 @@
  */
 import React, {Component} from 'react';
 import {Text,TextInput, View, Dimensions, Image} from 'react-native';
-import { Form, FormItem } from 'react-native-form-validation';
-import {ContainerSection, Button, Input, Spinner} from '../components';
+// import { Form, FormItem } from 'react-native-form-validation';
+import {ContainerSection, Input, Spinner} from '../components';
 import {connect} from 'react-redux';
 import {emailChanged, passwordChanged, loginUser, registerUser} from '../actions/AuthActions'
+import { FormLabel, FormInput,FormValidationMessage ,Button } from 'react-native-elements'
 import styles from '../styles'
 
 import {EMAIL_REG_EXP} from '../settings/settings';
@@ -33,7 +34,10 @@ const {
   backgroundImage,
   titleStyle,
   titleTextStyle,
-  containerStyle
+  containerStyle,
+  loginButtonStyle,
+  registerButtonStyle,
+  inputStyle
 } = styles.RegisterFormStyle
 
 class LoginFormEmail extends Component {
@@ -70,7 +74,7 @@ class LoginFormEmail extends Component {
   }
 
   onRegisterButtonPress() {
-    const {email, password, navigate} = this.props;
+    const {email, password, navigate } = this.props;
 
     this.props.registerUser({email, password, navigate});
   }
@@ -87,9 +91,13 @@ class LoginFormEmail extends Component {
       )
     }
     return (
-      <Button onPress={this.onLoginButtonPress.bind(this)}>
-        Log In
-      </Button>
+
+      <Button
+      onPress={this.onLoginButtonPress.bind(this)}
+      raised
+      icon={{name: 'lock', type: 'font-awesome'}}
+      buttonStyle={loginButtonStyle}
+      title='Login' />
     )
   }
 
@@ -105,9 +113,13 @@ class LoginFormEmail extends Component {
       )
     }
     return (
-      <Button onPress={this.onRegisterButtonPress.bind(this)}>
-        Register
-      </Button>
+
+      <Button
+      onPress={this.onRegisterButtonPress.bind(this)}
+      raised
+      icon={{name: 'envira', type: 'font-awesome'}}
+      buttonStyle= {registerButtonStyle}
+      title='Register' />
     )
   }
 
@@ -129,55 +141,39 @@ class LoginFormEmail extends Component {
             </Text>
           </View>
 
-          <Form
-            ref="loginForm"
-            shouldValidate={true}
-
-            >
-            <FormItem
-              isRequired={true}
-              style ={containerStyle}
-              >
-              <Input label="Email"
-                     placeholder="Email address"
-                     onChangeText={this.onEmailChange.bind(this)}
-                     value={this.props.email}
-                     style={containerStyle}
-              />
-           </FormItem>
-
-            <View style={{flex: 0.1}}/>
-
-            <FormItem
-              isRequired={true}
-              style={{width: containerWidth}}
-              >
-              <Input secureTextEntry
-                     password="true"
-                     label="Password"
-                     placeholder="Password"
-                     onChangeText={this.onPasswordChange.bind(this)}
-                     value={this.props.password}
-                     style={{width: containerWidth}}
-              />
-            </FormItem>
-
-         </Form>
-
-          <View style={{flex: 0.3}}/>
+          <View>
 
 
-          <ContainerSection style={{width: containerWidth, backgroundColor: "#2D9CDB"}}>
-            {this.renderLoginButton()}
-          </ContainerSection>
+          <FormInput
+            inputStyle={inputStyle}
+            placeholder="Email Address"
+            onChangeText={this.onEmailChange.bind(this)}
+            />
+          <FormValidationMessage>Email format wrong</FormValidationMessage>
+           <View style={{flex: 0.1}}/>
 
-          <View style={{flex: 0.2}}/>
+            <FormInput secureTextEntry
+              password="true"
+              inputStyle={inputStyle}
+              placeholder="password"
+              onChangeText={this.onPasswordChange.bind(this)}
+              password={true}
+            />
+          <FormValidationMessage>password not correct</FormValidationMessage>
+                        <View style={{flex: 0.1}}/>
+                        {this.renderLoginButton()}
+                         <View style={{flex: 0.1}}/>
 
-          <ContainerSection style={{width: containerWidth, backgroundColor: "#206C97"}}>
-            {this.renderRegistrationButton()}
-          </ContainerSection>
+                        {this.renderRegistrationButton()}
 
-          <View style={{flex: 1.2}}/>
+          </View>
+
+
+
+
+
+
+
 
         </Image>
       </View>

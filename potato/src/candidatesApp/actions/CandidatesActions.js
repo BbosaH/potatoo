@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesActions.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T14:13:26+03:00
+ * @Last modified time: 2017-09-15T20:28:19+03:00
  */
 
 
@@ -16,10 +16,28 @@
 import {CANDIDATE_UPDATE, CANDIDATES_FETCH_SUCCESS, CANDIDATE_CREATE, CANDIDATE_SAVE_SUCCESS, CANDIDATE_PREVIEW_NAVIGATE} from '../settings/settings'
 import firebase from 'firebase';
 
-export const candidateUpdate = ({prop, value}) => {
-  return {
-    type   : CANDIDATE_UPDATE,
-    payload: {prop, value}
+// export const candidateUpdate = ({prop, value}) => {
+//   return {
+//     type   : CANDIDATE_UPDATE,
+//     payload: {prop, value}
+//   };
+// };
+export const candidateUpdate = ({prop,value,candidate_id}) => {
+
+  const {currentUser} = firebase.auth();
+  const uid = candidate_id;
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/candidates/${uid}/status`)
+      .set(value)
+      .then(() => {
+
+        dispatch({
+          type: CANDIDATE_UPDATE,
+          payload: {prop, value}
+        })
+
+      })
   };
 };
 

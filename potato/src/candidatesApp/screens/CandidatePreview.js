@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatePreview.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T08:40:02+03:00
+ * @Last modified time: 2017-09-15T18:55:20+03:00
  */
 
 
@@ -14,11 +14,12 @@
  * Created by Lena on 28.08.2017.
  */
 import React, {Component} from 'react';
-import {Text, View, ScrollView, Button} from 'react-native';
+import {Text, View, ScrollView} from 'react-native';
 import {PreviewText, PreviewHyperlink} from '../components';
 import {connect} from 'react-redux';
 import {candidateUpdate, candidateCreate} from '../actions'
 import styles from '../styles'
+import { Card, ListItem, Button } from 'react-native-elements'
 
 
 
@@ -27,8 +28,8 @@ class CandidatesPreview extends Component {
     const {navigate} = navigation;
 
     return {
-      title : <Text style={styles.CandidatePreviewStyle.headerTitleTextStyle}>Preview Existing
-      Candidate</Text>,
+      title : <Text style={styles.CandidatePreviewStyle.headerTitleTextStyle}>
+      Candidate Details</Text>,
       headerRight: (<Button title="Save/Add"
                             onPress={() => navigate('CandidatesList')}/>),
       headerLeft : (<Button title="Back"
@@ -43,107 +44,214 @@ class CandidatesPreview extends Component {
 
     return (
 
-      <View>
+      <View style={{backgroundColor:'#F9FBE7'}}>
         <ScrollView style={{alignSelf: 'stretch'}}>
-          <Text style={styles.CandidatePreviewStyle.titleTextStyle}>
-            Candidates details
-          </Text>
-          <PreviewText title="Surname and Name"
-                       value={params.candidate.name}
-          />
-          <PreviewText title="Email"
-                       placeholder="example@mail.com"
-                       value={params.candidate.email}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'email', value: text})}
-          />
-          <PreviewText title="Education"
-                       placeholder="Education"
-                       value={params.candidate.education}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'education', value: text})}
-          />
-          <PreviewText title="Level"
-                       placeholder="Junior"
-                       value={params.candidate.level}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'level', value: text})}
-          />
-          <PreviewText title="Years in JS"
-                       placeholder="0-1"
-                       value={params.candidate.jsyears}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'jsyears', value: text})}
-          />
-          <PreviewText title="Years in Front-End"
-                       placeholder="0-1"
-                       value={params.candidate.feyears}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'feyears', value: text})}
-          />
-          <PreviewHyperlink title="Github Link"
-                       value="https://github.com"
-                       onChangeText={text => this.props.candidateUpdate({prop: 'ghlink', value: text})}
-          />
-          <PreviewText title="Skills"
-                       placeholder="Candidate's skills"
-                       value={params.candidate.skills}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'skills', value: text})}
-          />
-          <PreviewText title="Project Description"
-                       placeholder="Description"
-                       value={params.candidate.project}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'project', value: text})}
-          />
-          <PreviewText title="Notice"
-                       placeholder="2 weeks"
-                       value={params.candidate.notice}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'notice', value: text})}
-          />
-          <PreviewText title="Timezone"
-                       placeholder="UTC"
-                       value={params.candidate.zone}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'zone', value: text})}
-          />
-          <PreviewText title="Based in"
-                       placeholder="San Francisco"
-                       value={params.candidate.based}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'based', value: text})}
-          />
-          <PreviewText title="Current Position"
-                       placeholder="Programmer"
-                       value={params.candidate.current}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'current', value: text})}
-          />
-          <PreviewText title="Salary Expectation"
-                       placeholder="10,000.00 EUR"
-                       value={params.candidate.salary}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'salary', value: text})}
-          />
-          <PreviewText title="How got to know Aurity?"
-                       placeholder="Google"
-                       value={params.candidate.whereaurity}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'whereaurity', value: text})}
-          />
-          <PreviewText title="Online Courses"
-                       placeholder="udemy"
-                       value={params.candidate.courses}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'courses', value: text})}
-          />
-          <PreviewText title="Details"
-                       placeholder="Details"
-                       value={params.candidate.details}
-                       onChangeText={text => this.props.candidateUpdate({prop: 'details', value: text})}
-          />
+          <Card
+            title={params.candidate.name}
+            image={require('../img/african.png')}
+
+            >
+            <ListItem
+              title={
+              <View style={{flexDirection:'row'}}>
+                <Text style={{flex:1, fontWeight:'bold'}}>Name</Text>
+                <Text style={{flex:1, fontWeight:'bold'}}>{params.candidate.name}</Text>
+              </View>
+              }
+            />
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Email</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.email}</Text>
+                </View>
+              }
+            />
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Education</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.education}</Text>
+                </View>
+              }
+            />
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Level</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.level}</Text>
+                </View>
+              }
+            />
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Javascript years</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.jsyears}</Text>
+                </View>
+              }
+            />
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Years in Front-End</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.feyears}</Text>
+                </View>
+              }
+            />
+
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Github Link</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.ghlink}</Text>
+                </View>
+              }
+            />
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Skills</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.skills}</Text>
+                </View>
+              }
+            />
+          
+
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Project</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.project}</Text>
+                </View>
+              }
+            />
+
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Notice</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.notice}</Text>
+                </View>
+              }
+            />
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Timezone</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.zone}</Text>
+                </View>
+              }
+            />
+
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Based in</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.based}</Text>
+                </View>
+              }
+            />
+
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Current Position</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.current}</Text>
+                </View>
+              }
+            />
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Salary Expectation</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.salary}</Text>
+                </View>
+              }
+            />
+            <ListItem
+              onpress={text => this.props.candidateUpdate({prop: 'whereaurity', value: text})}
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>How you got to know Aurity?</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.whereaurity}</Text>
+                </View>
+              }
+
+            />
+            <ListItem
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Online courses</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.courses}</Text>
+                </View>
+              }
+
+            />
+            <ListItem
+
+              title={
+
+                <View style={{flexDirection:'row'}}>
+                  <Text style={{flex:1 , fontWeight:'bold'}}>Details</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.details}</Text>
+                </View>
+              }
+
+            />
 
 
-        <View style={styles.CandidatePreviewStyle.footView}>
-            <View style={styles.CandidatePreviewStyle.lowerButtonView}>
-              <Button title="Screening"
-                      onPress={() => this.props.candidateUpdate({prop: 'status', value: 'Screening'})}
-                      color="#579c2b"/>
-            </View>
-            <View style={styles.CandidatePreviewStyle.lowerButtonView}>
-              <Button title="Rejected"
-                      onPress={() => this.props.candidateUpdate({prop: 'status', value: 'Rejected'})}
-                      color="#9c2927"/>
-            </View>
-          </View>
+            <View style={styles.CandidatePreviewStyle.footView}>
+                <View style={styles.CandidatePreviewStyle.lowerButtonView}>
+                  <Button title="Screening"
+                          backgroundColor='#579c2b'
+                          fontFamily='Lato'
+                          buttonStyle={{borderRadius: 50, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                          onPress={() => this.props.candidateUpdate({prop: 'status', value: 'Screening',candidate_id : params.candidate.uid})}
+                          color="#ffffff"/>
+                </View>
+                <View style={styles.CandidatePreviewStyle.lowerButtonView}>
+                  <Button title="Rejected"
+                          backgroundColor='#03A9F4'
+                          fontFamily='Lato'
+                          buttonStyle={{borderRadius: 50, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                          onPress={() => this.props.candidateUpdate({prop: 'status', value: 'Rejected',candidate_id : params.candidate.uid})}
+                          color="#ffffff"/>
+                </View>
+              </View>
+
+
+          </Card>
+
+
         </ScrollView>
       </View>
     )

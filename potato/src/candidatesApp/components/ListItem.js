@@ -1,12 +1,25 @@
 /**
+ * @Author: Henry Bbosa <magicwand>
+ * @Date:   2017-09-12T15:43:06+03:00
+ * @Email:  bbosa.henry1@gmail.com
+ * @Project: potato
+ * @Filename: ListItem.js
+ * @Last modified by:   magicwand
+ * @Last modified time: 2017-09-15T11:31:26+03:00
+ */
+
+
+
+/**
  * Created by Lena on 21.08.2017.
  */
 import React, {Component} from 'React';
 import {Text, View, TouchableWithoutFeedback} from 'react-native';
+import { List, ListItem } from 'react-native-elements'
 
 
 
-class ListItem extends Component {
+class ListRow extends Component {
   // onRowPress() {
   //   this.props.navigation.navigate('CandidatePreview')
   //
@@ -25,15 +38,15 @@ class ListItem extends Component {
 
 
     return (
-      <TouchableWithoutFeedback onPress={()=>{onCPress(this.props.candidate)}}>
-        <View>
-          <View style={styles.containerStyle}>
-            <Text style={styles.titleStyle}>
-              {name}, {status}, {level}, {salary}
-            </Text>
-          </View>
-        </View>
-      </TouchableWithoutFeedback>
+      <ListItem onPress={()=>{onCPress(this.props.candidate)}}
+        roundAvatar
+        title={name}
+        avatar={require('../img/pretty.png')}
+        subtitle={level+' '+status}
+
+        >
+
+      </ListItem>
     );
   }
 }
@@ -58,4 +71,4 @@ const styles = {
   }
 }
 
-export default ListItem;
+export default ListRow;

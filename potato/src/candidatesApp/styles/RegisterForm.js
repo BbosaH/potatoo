@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: RegisterForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T10:30:42+03:00
+ * @Last modified time: 2017-09-14T22:10:41+03:00
  */
 
 
@@ -54,6 +54,22 @@ const containerWidth = Dimensions.get('window').width * 0.7
    ContainerStyle: {
       width   : containerWidth,
       height: 10
+   },
+   loginButtonStyle :{
+     height : 30,
+     backgroundColor:'#1A237E',
+     width   : containerWidth,
+   },
+
+   registerButtonStyle :{
+     height : 30,
+     backgroundColor:'#1565C0',
+     width   : containerWidth,
+   },
+   inputStyle :{
+     height : 15,
+     color :'#1A237E',
+     width   : containerWidth
    }
 
 });

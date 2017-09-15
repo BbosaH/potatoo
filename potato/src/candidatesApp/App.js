@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: App.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T13:56:25+03:00
+ * @Last modified time: 2017-09-15T19:28:14+03:00
  */
 
 
@@ -44,19 +44,19 @@ class App extends Component {
   componentWillMount() {
     const config = {
 
-      apiKey           : "AIzaSyDZYlySNVAPsym5GCTMCgE4x_p7GsFpWKo",
-      authDomain       : "potato-5211a.firebaseapp.com",
-      databaseURL      : "https://potato-5211a.firebaseio.com",
-      projectId        : "potato-5211a",
-      storageBucket    : "potato-5211a.appspot.com",
-      messagingSenderId: "397918687238"
+      // apiKey           : "AIzaSyDZYlySNVAPsym5GCTMCgE4x_p7GsFpWKo",
+      // authDomain       : "potato-5211a.firebaseapp.com",
+      // databaseURL      : "https://potato-5211a.firebaseio.com",
+      // projectId        : "potato-5211a",
+      // storageBucket    : "potato-5211a.appspot.com",
+      // messagingSenderId: "397918687238"
 
-      // apiKey: "AIzaSyDxWV4NUN6m79uq_zlej3mfR2Dan8DWlw4",
-      // authDomain: "potato-99918.firebaseapp.com",
-      // databaseURL: "https://potato-99918.firebaseio.com",
-      // projectId: "potato-99918",
-      // storageBucket: "potato-99918.appspot.com",
-      // messagingSenderId: "811049279083"
+      apiKey: "AIzaSyDxWV4NUN6m79uq_zlej3mfR2Dan8DWlw4",
+      authDomain: "potato-99918.firebaseapp.com",
+      databaseURL: "https://potato-99918.firebaseio.com",
+      projectId: "potato-99918",
+      storageBucket: "potato-99918.appspot.com",
+      messagingSenderId: "811049279083"
 
     };
     firebase.initializeApp(config);
