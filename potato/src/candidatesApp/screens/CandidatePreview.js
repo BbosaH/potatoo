@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatePreview.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-15T18:55:20+03:00
+ * @Last modified time: 2017-09-19T23:35:20+03:00
  */
 
 
@@ -17,9 +17,9 @@ import React, {Component} from 'react';
 import {Text, View, ScrollView} from 'react-native';
 import {PreviewText, PreviewHyperlink} from '../components';
 import {connect} from 'react-redux';
-import {candidateUpdate, candidateCreate} from '../actions'
+import {candidateUpdate,candidateStatusUpdate,candidateCreate} from '../actions/CandidatesActions'
 import styles from '../styles'
-import { Card, ListItem, Button } from 'react-native-elements'
+import { Card, ListItem, Button,Icon } from 'react-native-elements'
 
 
 
@@ -28,23 +28,34 @@ class CandidatesPreview extends Component {
     const {navigate} = navigation;
 
     return {
-      title : <Text style={styles.CandidatePreviewStyle.headerTitleTextStyle}>
-      Candidate Details</Text>,
-      headerRight: (<Button title="Save/Add"
-                            onPress={() => navigate('CandidatesList')}/>),
-      headerLeft : (<Button title="Back"
-                            onPress={() => navigate('CandidatesList')}/>)
+
+            title      :<Text style={{alignSelf: 'center', color:'#ffffff', fontWeight: 'bold',fontSize:24}}>Candidate Details</Text>,
+            headerRight: (<Icon
+            name='dots-three-horizontal'
+            type='entypo'
+            fontSize="20"
+            color="#ffffff"
+            onPress={() => navigate('CandidatesList')}
+            />),
+            headerStyle:{backgroundColor:'#4E342E',color:'#ffffff'},
+            headerLeft : (<Icon
+            name='chevron-thin-left'
+            color="#ffffff"
+            fontSize="20"
+            type='entypo'
+            onPress={() => navigate('CandidatesList')}
+            />)
     }
   }
 
   render() {
 
     const { params } = this.props.navigation.state;
-    console.log("The params are",params);
+    console.log("Cmon naawe The params are",params);
 
     return (
 
-      <View style={{backgroundColor:'#F9FBE7'}}>
+      <View style={{backgroundColor:'#D7CCC8'}}>
         <ScrollView style={{alignSelf: 'stretch'}}>
           <Card
             title={params.candidate.name}
@@ -130,7 +141,7 @@ class CandidatesPreview extends Component {
                 </View>
               }
             />
-          
+
 
             <ListItem
 
@@ -232,18 +243,18 @@ class CandidatesPreview extends Component {
             <View style={styles.CandidatePreviewStyle.footView}>
                 <View style={styles.CandidatePreviewStyle.lowerButtonView}>
                   <Button title="Screening"
-                          backgroundColor='#579c2b'
+                          backgroundColor='#3E2723'
                           fontFamily='Lato'
                           buttonStyle={{borderRadius: 50, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                          onPress={() => this.props.candidateUpdate({prop: 'status', value: 'Screening',candidate_id : params.candidate.uid})}
+                          onPress={() => this.props.candidateStatusUpdate({prop: 'status', value: 'Screening',candidate_id : params.candidate.uid})}
                           color="#ffffff"/>
                 </View>
                 <View style={styles.CandidatePreviewStyle.lowerButtonView}>
                   <Button title="Rejected"
-                          backgroundColor='#03A9F4'
+                          backgroundColor='#A1887F'
                           fontFamily='Lato'
                           buttonStyle={{borderRadius: 50, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                          onPress={() => this.props.candidateUpdate({prop: 'status', value: 'Rejected',candidate_id : params.candidate.uid})}
+                          onPress={() => this.props.candidateStatusUpdate({prop: 'status', value: 'Rejected',candidate_id : params.candidate.uid})}
                           color="#ffffff"/>
                 </View>
               </View>
@@ -303,4 +314,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {candidateUpdate, candidateCreate})(CandidatesPreview);
+export default connect(mapStateToProps, {candidateUpdate, candidateStatusUpdate,candidateCreate})(CandidatesPreview);

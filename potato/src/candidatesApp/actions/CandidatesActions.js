@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesActions.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-15T20:28:19+03:00
+ * @Last modified time: 2017-09-18T15:22:21+03:00
  */
 
 
@@ -13,16 +13,16 @@
 /**
  * Created by Lena on 18.08.2017.
  */
-import {CANDIDATE_UPDATE, CANDIDATES_FETCH_SUCCESS, CANDIDATE_CREATE, CANDIDATE_SAVE_SUCCESS, CANDIDATE_PREVIEW_NAVIGATE} from '../settings/settings'
+import {CANDIDATE_UPDATE,LEVELS_FETCH_SUCCESS,CANDIDATE_STATUS_UPDATE,CANDIDATES_FETCH_SUCCESS, CANDIDATE_CREATE, CANDIDATE_SAVE_SUCCESS, CANDIDATE_PREVIEW_NAVIGATE} from '../settings/settings'
 import firebase from 'firebase';
 
-// export const candidateUpdate = ({prop, value}) => {
-//   return {
-//     type   : CANDIDATE_UPDATE,
-//     payload: {prop, value}
-//   };
-// };
-export const candidateUpdate = ({prop,value,candidate_id}) => {
+export const candidateUpdate = ({prop, value}) => {
+  return {
+    type   : CANDIDATE_UPDATE,
+    payload: {prop, value}
+  };
+};
+export const candidateStatusUpdate = ({prop,value,candidate_id}) => {
 
   const {currentUser} = firebase.auth();
   const uid = candidate_id;
@@ -33,12 +33,13 @@ export const candidateUpdate = ({prop,value,candidate_id}) => {
       .then(() => {
 
         dispatch({
-          type: CANDIDATE_UPDATE,
+          type: CANDIDATE_STATUS_UPDATE,
           payload: {prop, value}
         })
 
       })
   };
+
 };
 
 export const candidatesFetch = () => {
@@ -48,6 +49,17 @@ export const candidatesFetch = () => {
     firebase.database().ref(`/users/${currentUser.uid}/candidates`)
             .on('value', snapshot => {
               dispatch({type: CANDIDATES_FETCH_SUCCESS, payload: snapshot.val()});
+            });
+  };
+};
+
+export const levelsFetch = () => {
+  const {currentUser} = firebase.auth();
+
+  return (dispatch) => {
+    firebase.database().ref(`/levels`)
+            .on('value', snapshot => {
+              dispatch({type: LEVELS_FETCH_SUCCESS, payload: snapshot.val()});
             });
   };
 };

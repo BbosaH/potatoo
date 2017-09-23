@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesList.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-14T23:02:26+03:00
+ * @Last modified time: 2017-09-20T20:30:17+03:00
  */
 
 
@@ -15,10 +15,10 @@
  */
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {Text, View, Button, ListView} from 'react-native';
-import {List} from 'react-native-elements'
+import {Text, View,  ListView} from 'react-native';
+import {List,Button,Icon,SearchBar} from 'react-native-elements'
 import {connect} from 'react-redux';
-import {candidatesFetch, candidatePreviewNavigate} from '../actions/CandidatesActions';
+import {candidatesFetch, candidatePreviewNavigate} from '../actions';
 //import {ListItem} from '../common'
 //import ListItemRedux from './ListItemREDUX'
 //import {ListItemConst} from './ListItemConst'
@@ -44,11 +44,16 @@ class CandidatesList extends Component {
 
 
     return {
-      title      : <Text style={styles.CandidateListStyle.headerTitleTextStyle}>List off
-        Candidates</Text>,
-      headerRight: (<Button title="Add New Candidate"
-                            onPress={() => navigate('CandidatesForm')}/>),
-      headerLeft : null
+      title      : <Text style={{alignSelf: 'right', color: "#ffffff", fontWeight: 'bold',fontSize:25}}>List of Candidates</Text>,
+      headerRight: (<Icon
+      name='circle-with-plus'
+      color="#ffffff"
+      fontSize="20"
+      type='entypo'
+      onPress={() => navigate('CandidatesForm')}
+      />),
+      headerStyle:{backgroundColor:'#4E342E',color:'#ffffff'},
+      headerLeft :null
     }
   }
 
@@ -108,7 +113,15 @@ class CandidatesList extends Component {
 
 
     return (
-      <View>
+      <View style={{backgroundColor: '#D7CCC8'}}>
+
+        <SearchBar
+          round
+          lightTheme
+          placeholder='Search Candidate...'
+         />
+
+
         <List>
           <ListView
             enableEmptySections
@@ -121,6 +134,10 @@ class CandidatesList extends Component {
         </List>
         <View style={{margin: 10}}>
           <Button title="Add new Candidate"
+                  raised
+                  icon={{name: 'circle-with-plus' , type:'entypo'}}
+                  backgroundColor="#3E2723"
+                  color="#ffffff"
                   onPress={() => navigate('CandidatesForm')}/>
         </View>
       </View>

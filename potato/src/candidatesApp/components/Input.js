@@ -1,4 +1,16 @@
 /**
+ * @Author: Henry Bbosa <magicwand>
+ * @Date:   2017-09-12T15:43:06+03:00
+ * @Email:  bbosa.henry1@gmail.com
+ * @Project: potato
+ * @Filename: Input.js
+ * @Last modified by:   magicwand
+ * @Last modified time: 2017-09-18T20:09:54+03:00
+ */
+
+
+
+/**
  * Created by Lena on 14.07.2017.
  */
 import React from 'react';
@@ -15,7 +27,7 @@ const {inputStyle, containerStyle, password} = styles;
         password={password}
         placeholder={placeholder}
         autoCorrect={false}
-        style={styles.TextInputStyle.inputStyle}
+        style={inputStyle}
         value={value}
         onChangeText={onChangeText}
         underlineColorAndroid='rgba(0,0,0,0)'

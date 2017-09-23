@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T07:35:48+03:00
+ * @Last modified time: 2017-09-22T08:51:55+03:00
  */
 
 import {StyleSheet,Dimensions} from 'react-native';
@@ -14,6 +14,14 @@ const height = Dimensions.get('window').height;
 const containerWidth = Dimensions.get('window').width * 0.7
 
  const CandidatesFormStyle= StyleSheet.create({
+   mainViewStyle: {
+     height         : height,
+     backgroundColor: '#E3F2FD',
+     flexDirection  : 'column',
+     justifyContent : 'flex-end',
+     alignItems     : 'center',
+     width : containerWidth
+   },
 
   titleStyle :{
     alignSelf: 'center',
@@ -44,6 +52,16 @@ const containerWidth = Dimensions.get('window').width * 0.7
      alignSelf      : 'stretch',
      backgroundColor: '#fff',
      elevation      : 10
+   },
+   TextFieldStyle : {
+     width : containerWidth,
+     backgroundColor:'#000000'
+   }
+   ,
+   inputStyle :{
+     height : 15,
+     color :'#1A237E',
+     width   : containerWidth
    }
 
 });

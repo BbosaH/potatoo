@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesReducer.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-15T16:08:23+03:00
+ * @Last modified time: 2017-09-18T14:00:21+03:00
  */
 
 
@@ -13,7 +13,7 @@
 /**
  * Created by Lena on 18.08.2017.
  */
-import {CANDIDATE_UPDATE, CANDIDATE_CREATE, CANDIDATE_SAVE_SUCCESS, CANDIDATE_PREVIEW_NAVIGATE} from '../settings/settings'
+import {CANDIDATE_UPDATE,CANDIDATE_STATUS_UPDATE, CANDIDATE_CREATE, CANDIDATE_SAVE_SUCCESS, CANDIDATE_PREVIEW_NAVIGATE} from '../settings/settings'
 
 INITIAL_STATE = {
   name: '',
@@ -41,6 +41,9 @@ export default (state = INITIAL_STATE, action) => {
     case CANDIDATE_UPDATE:
       console.log("The state is =>",state);
       return {...state, [action.payload.prop]: action.payload.value};
+    case CANDIDATE_STATUS_UPDATE:
+        console.log("The state is =>",state);
+        return {...state, [action.payload.prop]: action.payload.value};
     case CANDIDATE_CREATE:
       return INITIAL_STATE;
     case CANDIDATE_SAVE_SUCCESS:

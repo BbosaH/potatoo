@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T08:52:45+03:00
+ * @Last modified time: 2017-09-19T23:05:03+03:00
  */
 
 
@@ -15,25 +15,76 @@
  */
 
 import React, {Component} from 'react';
-import {Text, View, ScrollView, Button, TextInput} from 'react-native';
+import {ScrollView,StatusBar,ToolbarAndroid} from 'react-native';
 import {InputSection} from '../components';
 import {connect} from 'react-redux';
-import {candidateUpdate, candidateCreate} from '../actions'
-import styles from '../styles'
+import {candidateUpdate,candidateCreate,candidatesFetch,levelsFetch} from '../actions'
+// import {candidatesFetch, candidatePreviewNavigate} from '../actions/CandidatesActions';
 
+import styles from '../styles'
+import { TextInput,Text,View} from '@shoutem/ui'
+import { FormLabel,FormValidationMessage,Button,Icon,SearchBar} from 'react-native-elements'
+
+
+
+const {
+  mainViewStyle,
+  TextFieldStyle,
+  viewStyle,
+  DetailsTextStyle,
+  titleStyle,
+  textStyle,
+  inputStyle
+} = styles.CandidatesFormStyle
 
 class CandidatesForm extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      email: '',
+      emailError: '',
+      years : '',
+      yearsError : '',
+      password: '',
+      passwordError: ''
+    }
+  }
+
   static navigationOptions = ({navigation}) => {
     const {navigate} = navigation;
 
     return {
-      title      : <Text style={{alignSelf: 'center', color: "#206C97", fontWeight: 'normal'}}>Create New Candidate</Text>,
-      headerRight: (<Button title="Save/Add"
-                            onPress={() => navigate('CandidatesList')}/>),
-      headerLeft : (<Button title="Back"
-                            onPress={() => navigate('CandidatesList')}/>)
+
+      title      :<Text style={{alignSelf: 'center', color:'#ffffff', fontWeight: 'bold',fontSize:24}}>Create New Candidate</Text>,
+      headerRight: (<Icon
+      name='dots-three-horizontal'
+      type='entypo'
+      fontSize="20"
+      color="#ffffff"
+      onPress={() => navigate('CandidatesList')}
+      />),
+      headerStyle:{backgroundColor:'#4E342E',color:'#ffffff'},
+      headerLeft : (<Icon
+      name='chevron-thin-left'
+      color="#ffffff"
+      fontSize="20"
+      type='entypo'
+      onPress={() => navigate('CandidatesList')}
+      />)
     }
   }
+
+  componentWillMount() {
+    console.log("The porddoo are",this.props);
+    this.props.levelsFetch();
+    //this.createDataSource(this.props)
+  }
+
+  // componentWillReceiveProps(nextProps) {
+  //   this.createDataSource(nextProps)
+  // }
 
   onButtonPress() {
     const {
@@ -81,108 +132,193 @@ class CandidatesForm extends Component {
 
   render() {
 
+    validateEmail = (email) => {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(email);
+    };
+    updateMail = (text) => {
+      if (!validateEmail(text)) {
+        this.props.candidateUpdate({prop: 'email', value: text})
+      }else{
+        // valid email
+        this.props.candidateUpdate({prop: 'email', value: text})
+      }
+    }
+
     return (
-      <View>
+      <View style={{backgroundColor: '#D7CCC8',flexDirection  : 'column'}}>
+        <StatusBar
+           backgroundColor="#3E2723"
+           barStyle="light-content"
+         />
+
+
+
         <ScrollView style={{alignSelf: 'stretch'}}>
-          <Text style={styles.CandidatesFormStyle.titleStyle}>
-            Candidates details
-          </Text>
-          <InputSection title="Surname and Name"
-                        placeholder="Kowalski Jan"
-                        value={this.props.name}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'name', value: text})}
+
+          <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+          <TextInput
+            inputStyle={inputStyle}
+            placeholder="name"
+            value={this.props.name}
+              onChangeText={text => this.props.candidateUpdate({prop: 'name', value: text})}
+            />
+          <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+          <TextInput
+            inputStyle={inputStyle}
+            placeholder="email"
+            placeholderTextColor='#000000'
+            keyboardType='email-address'
+            value={this.props.email}
+            onChangeText={text => updateMail(text) }
+            />
+
+          <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+          <TextInput
+              inputStyle={inputStyle}
+              placeholder="education level"
+              placeholderTextColor='#000000'
+                value={this.props.education}
+              onChangeText={text => this.props.candidateUpdate({prop: 'education', value: text})}
           />
-          <InputSection title="Email"
-                        placeholder="example@mail.com"
-                        value={this.props.email}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'email', value: text})}
-          />
-          <InputSection title="Education"
-                        placeholder="Education"
-                        value={this.props.education}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'education', value: text})}
-          />
-          <InputSection title="Level"
-                        placeholder="Junior"
-                        value={this.props.level}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'level', value: text})}
-          />
-          <InputSection title="Years in JS"
-                        placeholder="0-1"
-                        value={this.props.jsyears}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'jsyears', value: text})}
-          />
-          <InputSection title="Years in Front-End"
-                        placeholder="0-1"
-                        value={this.props.feyears}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'feyears', value: text})}
-          />
-          <InputSection title="Github Link"
-                        placeholder="https://github.com"
-                        value={this.props.ghlink}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'ghlink', value: text})}
-          />
-          <InputSection title="Skills"
+
+            <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+            <TextInput
+                inputStyle={inputStyle}
+                placeholder="programing level"
+                placeholderTextColor='#000000'
+                value={this.props.level}
+                onChangeText={text => this.props.candidateUpdate({prop: 'level', value: text})}
+            />
+
+             <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+              <TextInput
+                  inputStyle={inputStyle}
+                  placeholder="Years in javascript e.g 0-9"
+                  keyboardType='numeric'
+                  placeholderTextColor='#000000'
+                  value={this.props.jsyears}
+                  onChangeText={text => this.props.candidateUpdate({prop: 'jsyears', value: text})}
+              />
+
+
+              <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                <TextInput
+                    inputStyle={inputStyle}
+                    placeholder="Years in Front end e.g 0-9"
+                    keyboardType='numeric'
+                    placeholderTextColor='#000000'
+                    value={this.props.feyears}
+                    onChangeText={text => this.props.candidateUpdate({prop: 'feyears', value: text})}
+                />
+
+
+                  <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                  <TextInput
+                      inputStyle={inputStyle}
+                      placeholder="Github link"
+                      value={this.props.ghlink}
+                      onChangeText={text => this.props.candidateUpdate({prop: 'ghlink', value: text})}
+                  />
+
+
+
+                    <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                    <TextInput
+                        inputStyle={inputStyle}
                         placeholder="Candidate's skills"
                         value={this.props.skills}
                         onChangeText={text => this.props.candidateUpdate({prop: 'skills', value: text})}
-          />
-          <InputSection title="Project Description"
-                        placeholder="Description"
-                        value={this.props.project}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'project', value: text})}
-          />
-          <InputSection title="Notice"
-                        placeholder="2 weeks"
-                        value={this.props.notice}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'notice', value: text})}
-          />
-          <InputSection title="Timezone"
-                        placeholder="UTC"
-                        value={this.props.zone}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'zone', value: text})}
-          />
-          <InputSection title="Based in"
-                        placeholder="San Francisco"
-                        value={this.props.based}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'based', value: text})}
-          />
-          <InputSection title="Current Position"
-                        placeholder="Programmer"
-                        value={this.props.current}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'current', value: text})}
-          />
-          <InputSection title="Salary Expectation"
-                        placeholder="10,000.00 EUR"
-                        value={this.props.salary}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'salary', value: text})}
-          />
-          <InputSection title="How got to know Aurity?"
-                        placeholder="Google"
-                        value={this.props.whereaurity}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'whereaurity', value: text})}
-          />
-          <InputSection title="Online Courses"
-                        placeholder="udemy"
-                        value={this.props.courses}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'courses', value: text})}
-          />
-        <View style={styles.CandidatesFormStyle.viewStyle}>
-            <Text style={styles.CandidatesFormStyle.textStyle}>Details</Text>
-            <TextInput placeholder="Details or additional notes"
-                        style={styles.CandidatesFormStyle.DetailsTextStyle}
-                        underlineColorAndroid='rgba(0,0,0,0)'
-                        multiline={true}
-                        autoCorrect={false}
-                        value={this.props.details}
-                        onChangeText={text => this.props.candidateUpdate({prop: 'details', value: text})}
-            />
-          </View>
+                    />
+
+
+                     <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                      <TextInput
+                          inputStyle={inputStyle}
+                          placeholder="Projects worked on"
+                          value={this.props.project}
+                          onChangeText={text => this.props.candidateUpdate({prop: 'project', value: text})}
+                      />
+
+
+                      <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                        <TextInput
+                            inputStyle={inputStyle}
+                            placeholder="Notice period"
+                            value={this.props.notice}
+                            onChangeText={text => this.props.candidateUpdate({prop: 'notice', value: text})}
+                        />
+
+
+                        <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                          <TextInput
+                              inputStyle={inputStyle}
+                              placeholder="Timezone"
+                              value={this.props.zone}
+                              onChangeText={text => this.props.candidateUpdate({prop: 'zone', value: text})}
+                          />
+
+                          <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                            <TextInput
+                                inputStyle={inputStyle}
+                                placeholder="City of residence"
+                                value={this.props.based}
+                                onChangeText={text => this.props.candidateUpdate({prop: 'based', value: text})}
+                            />
+
+
+                             <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                              <TextInput
+                                  inputStyle={inputStyle}
+                                  placeholder="Current work Position"
+                                  value={this.props.current}
+                                  onChangeText={text => this.props.candidateUpdate({prop: 'current', value: text})}
+                              />
+
+
+                               <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                                <TextInput
+                                    inputStyle={inputStyle}
+                                    placeholder="Salary Expectation"
+                                    value={this.props.salary}
+                                    onChangeText={text => this.props.candidateUpdate({prop: 'salary', value: text})}
+                                />
+
+
+                                 <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                                  <TextInput
+                                      inputStyle={inputStyle}
+                                      placeholder="How you got to know Aurity?"
+                                      value={this.props.whereaurity}
+                                      onChangeText={text => this.props.candidateUpdate({prop: 'whereaurity', value: text})}
+                                  />
+
+
+
+                                   <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                                    <TextInput
+                                        inputStyle={inputStyle}
+                                        placeholder="Online Courses"
+                                        value={this.props.courses}
+                                        onChangeText={text => this.props.candidateUpdate({prop: 'courses', value: text})}
+                                    />
+
+
+
+
+
+
+
 
           <View style={{margin: 10, flex: 1}}>
-            <Button title="Save / Add"
-                    onPress={this.onButtonPress.bind(this)}
-                    color="#206C97"/>
+
+            <Button
+              onPress={this.onButtonPress.bind(this)}
+            raised
+            icon={{name: 'cached'}}
+            backgroundColor="#3E2723"
+            color="#ffffff"
+            title='Save Candidate' />
           </View>
 
         </ScrollView>
@@ -236,4 +372,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {candidateUpdate, candidateCreate})(CandidatesForm);
+export default connect(mapStateToProps, {candidateUpdate,levelsFetch,candidateCreate})(CandidatesForm);

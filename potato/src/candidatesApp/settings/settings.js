@@ -6,7 +6,7 @@
  * @Project: potato
  * @Filename: settings.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-10T07:36:22+03:00
+ * @Last modified time: 2017-09-18T15:22:27+03:00
  */
 
 
@@ -23,8 +23,10 @@ export const REGISTRATION_USER_FAIL = 'login_user_fail'
 
 /*Project settings */
 export const CANDIDATE_UPDATE = 'candidate_update'
+export const CANDIDATE_STATUS_UPDATE = 'candidate_status_update'
 export const CANDIDATE_CREATE = 'candidate_create';
 export const CANDIDATES_FETCH_SUCCESS = 'candidate_fetch_success';
+export const LEVELS_FETCH_SUCCESS = 'levels_fetch_success';
 export const CANDIDATE_SAVE_SUCCESS = 'candidate_save_success';
 export const CANDIDATE_PREVIEW_NAVIGATE = 'candidate_preview_navigate';
 export const EMAIL_REG_EXP = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;

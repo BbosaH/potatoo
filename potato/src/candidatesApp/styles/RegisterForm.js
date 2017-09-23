@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: RegisterForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-14T22:10:41+03:00
+ * @Last modified time: 2017-09-22T08:54:52+03:00
  */
 
 
@@ -13,16 +13,18 @@
 import {StyleSheet,Dimensions} from 'react-native';
 
 const height = Dimensions.get('window').height;
-const containerWidth = Dimensions.get('window').width * 0.7
+const containerFullWidth = Dimensions.get('window').width
+const containerWidth =  Dimensions.get('window').width* 0.7
 
  const RegisterFormStyle= StyleSheet.create({
 
    mainViewStyle: {
      height         : height,
-     backgroundColor: 'transparent',
+     backgroundColor: '#BCAAA4',
      flexDirection  : 'column',
-     justifyContent : 'flex-end',
+     justifyContent: 'center',
      alignItems     : 'center',
+     width        : containerFullWidth
    },
 
    backgroundImage: {
@@ -32,16 +34,16 @@ const containerWidth = Dimensions.get('window').width * 0.7
    },
 
    titleStyle: {
-     flex          : 5,
+     flex          : 2,
      padding       : 5,
      alignItems    : 'flex-start',
-     justifyContent: 'flex-end',
-     paddingBottom : 50,
+     justifyContent: 'center',
+     paddingBottom : 30,
    },
 
    titleTextStyle: {
      width        : containerWidth,
-     fontSize     : 40,
+     fontSize     : 30,
      color        : '#fff',
      alignItems   : 'flex-start',
      paddingBottom: 5,
@@ -56,9 +58,7 @@ const containerWidth = Dimensions.get('window').width * 0.7
       height: 10
    },
    loginButtonStyle :{
-     height : 30,
-     backgroundColor:'#1A237E',
-     width   : containerWidth,
+     width   : containerFullWidth,
    },
 
    registerButtonStyle :{
@@ -67,9 +67,11 @@ const containerWidth = Dimensions.get('window').width * 0.7
      width   : containerWidth,
    },
    inputStyle :{
+
      height : 15,
      color :'#1A237E',
-     width   : containerWidth
+     marginLeft:10,
+     width   : 300
    }
 
 });

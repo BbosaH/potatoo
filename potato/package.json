@@ -7,6 +7,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@shoutem/theme": "^0.10.0",
+    "@shoutem/ui": "^0.21.3",
     "firebase": "^4.3.0",
     "lodash": "^4.17.4",
     "react": "16.0.0-alpha.12",
@@ -18,7 +20,8 @@
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "validate.js": "^0.11.1"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",

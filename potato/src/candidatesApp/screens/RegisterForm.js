@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: RegisterForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-14T22:09:00+03:00
+ * @Last modified time: 2017-09-22T08:55:55+03:00
  */
 
 
@@ -14,18 +14,19 @@
  * Created by Lena on 11.08.2017.
  */
 import React, {Component} from 'react';
-import {Text,TextInput, View, Dimensions, Image} from 'react-native';
+import {Text, View, Dimensions, Image} from 'react-native';
+import { TextInput } from '@shoutem/ui'
 // import { Form, FormItem } from 'react-native-form-validation';
 import {ContainerSection, Input, Spinner} from '../components';
 import {connect} from 'react-redux';
 import {emailChanged, passwordChanged, loginUser, registerUser} from '../actions/AuthActions'
-import { FormLabel, FormInput,FormValidationMessage ,Button } from 'react-native-elements'
+import { Button } from 'react-native-elements'
 import styles from '../styles'
 
 import {EMAIL_REG_EXP} from '../settings/settings';
 
-//var width = Dimensions.get('window').width; //full width
-var height = Dimensions.get('window').height; //full height
+var containerFullwidth = Dimensions.get('window').width; //full width
+var containerHeight = Dimensions.get('window').height; //full height
 var containerWidth = Dimensions.get('window').width * 0.7
 
 const {
@@ -127,55 +128,44 @@ class LoginFormEmail extends Component {
 
   render() {
     return (
-      <View style={mainViewStyle}>
-        <Image source={require('../img/imgLoginPage.jpg')} style={backgroundImage}>
-          <View style={titleStyle}>
-            <Text style={titleTextStyle}>
-              YOUR
-            </Text>
-            <Text style={titleTextStyle}>
-              TRAINING
-            </Text>
-            <Text style={titleTextStyle}>
-              APP
-            </Text>
-          </View>
+      <View style={{width:containerFullwidth,backgroundColor: '#BCAAA4',flexDirection  : 'column',
+      justifyContent: 'center',height:containerHeight}}>
 
-          <View>
-
-
-          <FormInput
+          <TextInput
             inputStyle={inputStyle}
             placeholder="Email Address"
             onChangeText={this.onEmailChange.bind(this)}
             />
-          <FormValidationMessage>Email format wrong</FormValidationMessage>
-           <View style={{flex: 0.1}}/>
-
-            <FormInput secureTextEntry
+          <View style={{height:5}}/>
+            <TextInput secureTextEntry
               password="true"
-              inputStyle={inputStyle}
+              inputStyle={{width:300}}
               placeholder="password"
               onChangeText={this.onPasswordChange.bind(this)}
               password={true}
             />
-          <FormValidationMessage>password not correct</FormValidationMessage>
-                        <View style={{flex: 0.1}}/>
-                        {this.renderLoginButton()}
-                         <View style={{flex: 0.1}}/>
+          <View style={{height:15}}/>
 
-                        {this.renderRegistrationButton()}
-
-          </View>
-
-
-
-
+              <Button title="Login"
+                      raised
+                      icon={{name: 'lock' , type:'font-awesome'}}
+                      backgroundColor="#3E2723"
+                      color="#ffffff"
+                      buttonStyle={loginButtonStyle}
+                      onPress={this.onLoginButtonPress.bind(this)}
+                      />
 
 
+              <View style={{height:5}}/>
 
-
-        </Image>
+              <Button title="Register as new User"
+                      raised
+                      icon={{name: 'envira' , type:'font-awesome'}}
+                      backgroundColor="#5D4037"
+                      color="#ffffff"
+                      buttonStyle={loginButtonStyle}
+                      onPress={this.onRegisterButtonPress.bind(this)}
+                      />
       </View>
     )
   }
