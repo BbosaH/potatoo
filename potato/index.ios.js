@@ -1,53 +1,17 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * @Author: Henry Bbosa <magicwand>
+ * @Date:   2017-09-12T15:43:06+03:00
+ * @Email:  bbosa.henry1@gmail.com
+ * @Project: potato
+ * @Filename: index.ios.js
+ * @Last modified by:   magicwand
+ * @Last modified time: 2017-09-24T23:51:37+03:00
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
 
-export default class potato2 extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          It's finallly running!!!!!
-        </Text>
-        <Text style={styles.instructions}>dasd
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake foor dev menu
-        </Text>
-      </View>
-    );
-  }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+import {AppRegistry} from 'react-native';
+//import App from './src/trainingApp/App'
+import App from './src/candidatesApp/App'
 
-AppRegistry.registerComponent('potato2', () => potato2);
+AppRegistry.registerComponent('potato2', () => App);
