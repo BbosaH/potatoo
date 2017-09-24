@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-19T23:05:03+03:00
+ * @Last modified time: 2017-09-24T14:52:55+03:00
  */
 
 
@@ -22,8 +22,9 @@ import {candidateUpdate,candidateCreate,candidatesFetch,levelsFetch} from '../ac
 // import {candidatesFetch, candidatePreviewNavigate} from '../actions/CandidatesActions';
 
 import styles from '../styles'
-import { TextInput,Text,View} from '@shoutem/ui'
+import { TextInput,Text,View,DropDownMenu} from '@shoutem/ui'
 import { FormLabel,FormValidationMessage,Button,Icon,SearchBar} from 'react-native-elements'
+import {NUM_REG_EXP,EMAIL_REG_EXP,TIMEZONE_REG_EXP} from '../settings/settings'
 
 
 
@@ -43,10 +44,23 @@ class CandidatesForm extends Component {
     super(props)
 
     this.state = {
-      email: '',
+      email: this.props.email,
       emailError: '',
-      years : '',
-      yearsError : '',
+      jsyears : '',
+      numError : '',
+      feyears : '',
+      timezone:'',
+      timezoneError:'',
+      emailSpaceHeight: 5,
+      jsyearsSpaceHeight: 5,
+      feyearsSpaceHeight: 5,
+      timezoneSpaceHeight:5,
+      levels: [
+        { title: 'programming Level : Novince', value: 'Novince' },
+        { title: 'Junior', value: 'Junior' },
+        { title: 'Intermediate ', value: 'Intermediate' },
+        { title: 'Senior', value: 'Senior' },
+      ],
       password: '',
       passwordError: ''
     }
@@ -130,20 +144,115 @@ class CandidatesForm extends Component {
     })
   }
 
+  updateMail (text) {
+    this.setState({
+        email:text
+    });
+    if (validateReg(text,EMAIL_REG_EXP)) {
+      this.setState({
+          emailError:"",
+          emailSpaceHeight:5
+      });
+      this.props.candidateUpdate({prop: 'email', value: text})
+    }else{
+
+      this.setState({
+          emailError:"Invalid email",
+          emailSpaceHeight:25
+      });
+
+      console.log("Invalid email")
+
+    }
+  }
+
+  updatejsYears(text){
+
+    this.setState({
+        jsyears:text
+    });
+    if (validateReg(text,NUM_REG_EXP)) {
+      this.setState({
+          numError:"",
+          jsyearsSpaceHeight:5
+      });
+      this.props.candidateUpdate({prop: 'jsyears', value: text})
+    }else{
+
+      this.setState({
+          numError:"Input must be a number",
+          jsyearsSpaceHeight:25
+      });
+
+    }
+
+  }
+
+  updatefeYears(text){
+
+    this.setState({
+        feyears:text
+    });
+    if (validateReg(text,NUM_REG_EXP)) {
+      this.setState({
+          numError:"",
+          feyearsSpaceHeight:5
+      });
+      this.props.candidateUpdate({prop: 'feyears', value: text})
+    }else{
+
+      this.setState({
+          numError:"Input must be a number",
+          feyearsSpaceHeight:25
+      });
+
+    }
+
+  }
+
+  updatetimeZone(text){
+
+    this.setState({
+        timezone:text
+    });
+    if (validateReg(text,TIMEZONE_REG_EXP)) {
+      this.setState({
+          timezoneError:"",
+          timezoneSpaceHeight:5
+      });
+      this.props.candidateUpdate({prop: 'timezone', value: text})
+    }else{
+
+      this.setState({
+          timezoneError:"Invalid timezone format",
+          timezoneSpaceHeight:25
+      });
+
+    }
+
+  }
+
+  updateLevel(text){
+
+    this.setState({
+        selectedLevel:text
+    });
+    this.props.candidateUpdate({prop: 'level', value: text})
+
+
+  }
+
+
   render() {
 
-    validateEmail = (email) => {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return re.test(email);
+    validateReg = (text,reg_exp) => {
+      //  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return reg_exp.test(text);
     };
-    updateMail = (text) => {
-      if (!validateEmail(text)) {
-        this.props.candidateUpdate({prop: 'email', value: text})
-      }else{
-        // valid email
-        this.props.candidateUpdate({prop: 'email', value: text})
-      }
-    }
+    validateNo = (number) => {
+        var re =/^\\d+$/;
+          return re.test(number);
+    };
 
     return (
       <View style={{backgroundColor: '#D7CCC8',flexDirection  : 'column'}}>
@@ -169,11 +278,16 @@ class CandidatesForm extends Component {
             placeholder="email"
             placeholderTextColor='#000000'
             keyboardType='email-address'
-            value={this.props.email}
-            onChangeText={text => updateMail(text) }
+            value={this.state.email}
+            onChangeText={text =>this.updateMail(text) }
             />
 
-          <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+          <View style={{height:this.state.emailSpaceHeight,backgroundColor:"#D7CCC8"}}>
+            <Text style={{color:'#4E342E',fontWeight:"bold",paddingLeft:20}}>{this.state.emailError}</Text>
+          </View>
+
+
+
           <TextInput
               inputStyle={inputStyle}
               placeholder="education level"
@@ -183,12 +297,15 @@ class CandidatesForm extends Component {
           />
 
             <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
-            <TextInput
-                inputStyle={inputStyle}
-                placeholder="programing level"
-                placeholderTextColor='#000000'
-                value={this.props.level}
-                onChangeText={text => this.props.candidateUpdate({prop: 'level', value: text})}
+
+              <DropDownMenu
+              styleName="horizontal"
+              style={inputStyle}
+              options={this.state.levels}
+              selectedOption={this.state.selectedLevel ? this.state.selectedLevel : this.state.levels[0]}
+              onOptionSelected={(level) => this.updateLevel(level)}
+              titleProperty="title"
+              valueProperty="value"
             />
 
              <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
@@ -197,23 +314,26 @@ class CandidatesForm extends Component {
                   placeholder="Years in javascript e.g 0-9"
                   keyboardType='numeric'
                   placeholderTextColor='#000000'
-                  value={this.props.jsyears}
-                  onChangeText={text => this.props.candidateUpdate({prop: 'jsyears', value: text})}
+                  value={this.state.jsyears}
+                  onChangeText={text => this.updatejsYears(text)}
               />
+                <View style={{height:this.state.jsyearsSpaceHeight,backgroundColor:"#D7CCC8"}}>
+                    <Text style={{color:'#4E342E',fontWeight:"bold",paddingLeft:20}}>{this.state.numError}</Text>
+                  </View>
 
 
-              <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
                 <TextInput
                     inputStyle={inputStyle}
                     placeholder="Years in Front end e.g 0-9"
                     keyboardType='numeric'
                     placeholderTextColor='#000000'
-                    value={this.props.feyears}
-                    onChangeText={text => this.props.candidateUpdate({prop: 'feyears', value: text})}
+                    value={this.state.feyears}
+                    onChangeText={text => this.updatefeYears(text)}
                 />
+                <View style={{height:this.state.feyearsSpaceHeight,backgroundColor:"#D7CCC8"}}>
+                    <Text style={{color:'#4E342E',fontWeight:"bold",paddingLeft:20}}>{this.state.numError}</Text>
+                  </View>
 
-
-                  <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
                   <TextInput
                       inputStyle={inputStyle}
                       placeholder="Github link"
@@ -253,12 +373,16 @@ class CandidatesForm extends Component {
                         <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
                           <TextInput
                               inputStyle={inputStyle}
-                              placeholder="Timezone"
-                              value={this.props.zone}
-                              onChangeText={text => this.props.candidateUpdate({prop: 'zone', value: text})}
+                              placeholder="Timezone e.g +05:30"
+                              value={this.state.timezone}
+                              onChangeText={text => this.updatetimeZone(text)}
                           />
 
-                          <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+                        <View style={{height:this.state.timezoneSpaceHeight,backgroundColor:"#D7CCC8"}}>
+                              <Text style={{color:'#4E342E',fontWeight:"bold",paddingLeft:20}}>{this.state.timezoneError}</Text>
+                          </View>
+
+
                             <TextInput
                                 inputStyle={inputStyle}
                                 placeholder="City of residence"
@@ -318,6 +442,23 @@ class CandidatesForm extends Component {
             icon={{name: 'cached'}}
             backgroundColor="#3E2723"
             color="#ffffff"
+            disabled={
+              this.state.emailError.length>0 |
+              this.state.numError.length>0 |
+              this.state.timezoneError.length>0 |
+              !this.state.email |
+              !this.props.name |
+              !this.state.jsyears |
+              !this.state.feyears |
+              !this.state.timezone |
+              !this.props.based |
+              !this.props.skills |
+              !this.props.whereaurity|
+              !this.props.salary|
+              !this.props.current|
+              !this.props.notice|
+              !this.props.project
+             }
             title='Save Candidate' />
           </View>
 

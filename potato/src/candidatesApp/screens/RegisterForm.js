@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: RegisterForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-22T08:55:55+03:00
+ * @Last modified time: 2017-09-24T15:27:04+03:00
  */
 
 
@@ -27,7 +27,7 @@ import {EMAIL_REG_EXP} from '../settings/settings';
 
 var containerFullwidth = Dimensions.get('window').width; //full width
 var containerHeight = Dimensions.get('window').height; //full height
-var containerWidth = Dimensions.get('window').width * 0.7
+var containerWidth = Dimensions.get('window').width * 0.7;
 
 const {
   mainViewStyle,
@@ -75,7 +75,7 @@ class LoginFormEmail extends Component {
   }
 
   onRegisterButtonPress() {
-    const {email, password, navigate } = this.props;
+    const {email, password, navigate} = this.props;
 
     this.props.registerUser({email, password, navigate});
   }
@@ -127,9 +127,16 @@ class LoginFormEmail extends Component {
 
 
   render() {
+
     return (
       <View style={{width:containerFullwidth,backgroundColor: '#BCAAA4',flexDirection  : 'column',
       justifyContent: 'center',height:containerHeight}}>
+          <Image
+          styleName="small"
+          source={require('../img/app_logo.png')}
+          />
+        <View style={{height:50}}/>
+
 
           <TextInput
             inputStyle={inputStyle}
@@ -169,12 +176,13 @@ class LoginFormEmail extends Component {
       </View>
     )
   }
+
 }
 
 
 
 const mapStateToProps = (state, props) => {
-  const {auth} = state
+  const {auth} = state;
   const {email, password, loading, error, registrationError} = auth;
   const {navigate} = props.navigation
   return {email, password, navigate, loading, error, registrationError};

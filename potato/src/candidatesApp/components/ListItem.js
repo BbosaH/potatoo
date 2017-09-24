@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: ListItem.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-15T11:31:26+03:00
+ * @Last modified time: 2017-09-24T14:33:56+03:00
  */
 
 
@@ -42,7 +42,7 @@ class ListRow extends Component {
         roundAvatar
         title={name}
         avatar={require('../img/pretty.png')}
-        subtitle={level+' '+status}
+        subtitle={level.value+'  '+status}
 
         >
 

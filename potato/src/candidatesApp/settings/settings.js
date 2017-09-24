@@ -6,7 +6,7 @@
  * @Project: potato
  * @Filename: settings.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-18T15:22:27+03:00
+ * @Last modified time: 2017-09-24T11:47:15+03:00
  */
 
 
@@ -30,6 +30,8 @@ export const LEVELS_FETCH_SUCCESS = 'levels_fetch_success';
 export const CANDIDATE_SAVE_SUCCESS = 'candidate_save_success';
 export const CANDIDATE_PREVIEW_NAVIGATE = 'candidate_preview_navigate';
 export const EMAIL_REG_EXP = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+export const NUM_REG_EXP = /^[0-9]+$/;
+export const TIMEZONE_REG_EXP =/^(?:Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9])$/;
 /*End Project Settings*/
 
 /*Style Setting*/

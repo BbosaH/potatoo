@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatePreview.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-19T23:35:20+03:00
+ * @Last modified time: 2017-09-24T14:30:13+03:00
  */
 
 
@@ -96,7 +96,7 @@ class CandidatesPreview extends Component {
 
                 <View style={{flexDirection:'row'}}>
                   <Text style={{flex:1 , fontWeight:'bold'}}>Level</Text>
-                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.level}</Text>
+                  <Text style={{flex:1 , fontWeight:'bold' }}>{params.candidate.level.value}</Text>
                 </View>
               }
             />
