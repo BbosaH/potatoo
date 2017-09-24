@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesList.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-20T20:30:17+03:00
+ * @Last modified time: 2017-09-24T23:22:59+03:00
  */
 
 
@@ -34,6 +34,10 @@ class CandidatesList extends Component {
 
          super(props);
          //console.log("The porpsddoo are",this.props);
+         this.state = {
+           candidates: [],
+           fullCandidates:[]
+         }
   }
 
   static navigationOptions = ({navigation},props) => {
@@ -41,8 +45,6 @@ class CandidatesList extends Component {
     //navi = navigate
     console.log("This naviate is" , navigation);
     //console.log("The porpsddoo are",props);
-
-
     return {
       title      : <Text style={{alignSelf: 'right', color: "#ffffff", fontWeight: 'bold',fontSize:25}}>List of Candidates</Text>,
       headerRight: (<Icon
@@ -61,13 +63,28 @@ class CandidatesList extends Component {
     console.log("The porpsddoo are",this.props);
     this.props.candidatesFetch();
     this.createDataSource(this.props)
+    console.log("The The togodo are",this.props);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.createDataSource(nextProps)
+
+    const {candidates} = nextProps;
+    const diCandi=candidates;
+    this.setState((prevState)=>{
+      return {...prevState, candidates:diCandi,fullCandidates:diCandi}
+    },()=>{
+      console.log("updates");
+      this.createDataSource(nextProps)
+      this.forceUpdate()
+      console.log("The state is=>",this.state);
+    });
+    //console.log("The dicandi=>",diCandi);
+    //this.createDataSource(nextProps)
+    //console.log("The state is=>",this.state);
   }
 
   createDataSource({candidates}) {
+    console.log("The candidates are actually ==>",candidates);
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2
@@ -76,49 +93,46 @@ class CandidatesList extends Component {
     this.dataSource = ds.cloneWithRows(candidates)
   }
 
-  //onListedItemPress() {
-  //  const {navigate} = this.props;
-  //  this.props.candidatePreviewNavigate({navigate});
-  //}
+  filterItems(text){
+    let allCandidates = this.state.fullCandidates;
+    const searchPattern = new RegExp('^' + text, 'i');
+    allCandidates = allCandidates.filter((candidate )=>{
+       return (
+         candidate.level.value !== []._ &&
+         searchPattern.test(candidate.name)||
+         searchPattern.test(candidate.level.value)||
+         searchPattern.test(candidate.status)||
+         searchPattern.test(candidate.based)
+        );
+    });
+    this.setState((prevState)=>{
+      return {...prevState, candidates:allCandidates}
+    },()=>{
+      console.log("updates");
+      this.createDataSource(this.state)
+      this.forceUpdate();
+      console.log("The state is happened=>",this.state);
+    });
 
 
-
-
-
-  // renderRow(candidate, navigate) {
-  //
-  //   return <ListItemRedux onPress={()=>{onCandidatePress()}} candidate={candidate}/>;
-  // }
-
-
+  }
 
   render() {
 
-  // yes i put render row inside component
-  // I then accessed the onCandidatePress also
-  // no
     const {navigate} = this.props.navigation;
-    //console.log("The render props includek",navigate);
-    //console.log("This is properries", this.props);
-
-    //Very well
 
     const goTo=(candidate)=>{
 
           navigate('CandidatePreview',{candidate})
-
     }
-
-
-
-
-    return (
+return (
       <View style={{backgroundColor: '#D7CCC8'}}>
 
         <SearchBar
           round
           lightTheme
           placeholder='Search Candidate...'
+          onChangeText={text=>this.filterItems(text)}
          />
 
 

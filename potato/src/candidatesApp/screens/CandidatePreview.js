@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatePreview.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-24T14:30:13+03:00
+ * @Last modified time: 2017-09-24T23:34:15+03:00
  */
 
 
@@ -59,7 +59,7 @@ class CandidatesPreview extends Component {
         <ScrollView style={{alignSelf: 'stretch'}}>
           <Card
             title={params.candidate.name}
-            image={require('../img/african.png')}
+            image={require('../img/kenshy.png')}
 
             >
             <ListItem
