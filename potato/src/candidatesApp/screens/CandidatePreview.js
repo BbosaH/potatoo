@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatePreview.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-26T10:32:09+03:00
+ * @Last modified time: 2017-09-26T10:49:55+03:00
  */
 
 
@@ -28,8 +28,9 @@ class CandidatesPreview extends Component {
 
   constructor(props){
     super(props);
+    const { params } = this.props.navigation.state;
     this.state={
-      starCount: 3.5
+      starCount: params.candidate.rating
     }
   }
   static navigationOptions = ({navigation}) => {
@@ -96,7 +97,7 @@ class CandidatesPreview extends Component {
                     iconSet={'Ionicons'}
                     starSize={30}
                     maxStars={5}
-                    rating={params.candidate.rating}
+                    rating={this.state.starCount}
                     selectedStar={(rating) => this.onStarRatingPress(rating,params.candidate.uid,params.candidate.rating)}
                     starColor={'#4E342E'}
                     emptyStarColor={'#4E342E'}
