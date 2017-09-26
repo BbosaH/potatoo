@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: ListItem.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-26T10:00:18+03:00
+ * @Last modified time: 2017-09-26T11:07:52+03:00
  */
 
 
@@ -47,12 +47,14 @@ class ListRow extends Component {
     return (
       <ListItem onPress={()=>{onCPress(this.props.candidate)}}
         roundAvatar
-        title={name}
+        title={
+          <Text style={{fontWeight:'bold',color:"#4E342E",marginLeft:10}}>{name}</Text>
+        }
         avatar={require('../img/pretty.png')}
         subtitle={
 
           <View style={{width:100,marginLeft:10}}>
-
+            <Text style={{fontWeight:'bold'}}>{level.value}</Text>
             <StarRating
 
               disabled={false}
