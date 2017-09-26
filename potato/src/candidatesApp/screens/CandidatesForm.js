@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-26T10:05:27+03:00
+ * @Last modified time: 2017-09-26T11:46:44+03:00
  */
 
 
@@ -120,6 +120,7 @@ class CandidatesForm extends Component {
       courses,
       details,
       status,
+      rating
     } = this.props;
 
     this.props.candidateCreate({
@@ -141,6 +142,7 @@ class CandidatesForm extends Component {
       courses,
       details,
       status,
+      rating
     })
   }
 
@@ -489,6 +491,7 @@ const mapStateToProps = (state) => {
     courses,
     details,
     status,
+    rating
   } = state.candidates
 
   return {
@@ -510,6 +513,7 @@ const mapStateToProps = (state) => {
     courses,
     details,
     status,
+    rating
   }
 }
 

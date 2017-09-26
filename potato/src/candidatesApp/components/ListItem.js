@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: ListItem.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-26T11:07:52+03:00
+ * @Last modified time: 2017-09-26T11:38:36+03:00
  */
 
 
@@ -15,7 +15,7 @@
  */
 import React, {Component} from 'React';
 import {Text, View, TouchableWithoutFeedback} from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { List, ListItem,Badge } from 'react-native-elements';
 import StarRating from 'react-native-star-rating';
 
 
@@ -29,6 +29,41 @@ class ListRow extends Component {
     this.state={
       starCount: 3.5
     }
+  }
+
+  renderStatus(status){
+
+    switch(status){
+      case 'Screening':
+
+       return (
+         <Badge containerStyle={{ backgroundColor: '#424242'}}>
+            <Text style={{flex:1,fontWeight:'normal',color:"#ffffff"}}>{status}</Text>
+         </Badge>
+       )
+
+      break;
+      case 'New':
+        return (
+          <Badge containerStyle={{ backgroundColor: '#311B92'}}>
+             <Text style={{flex:1,fontWeight:'normal',color:"#ffffff"}}>{status}</Text>
+          </Badge>
+        )
+
+      break;
+      case 'Rejected':
+        return (
+          <Badge containerStyle={{ backgroundColor: '#4E342E'}}>
+             <Text style={{flex:1,fontWeight:'normal',color:"#ffffff"}}>{status}</Text>
+          </Badge>
+        )
+
+      break;
+      default:
+        return <Text style={{flex:1,fontWeight:'bold',color:"#00C853",marginLeft:10}}></Text>
+      break;
+    }
+
   }
 
 
@@ -48,7 +83,10 @@ class ListRow extends Component {
       <ListItem onPress={()=>{onCPress(this.props.candidate)}}
         roundAvatar
         title={
-          <Text style={{fontWeight:'bold',color:"#4E342E",marginLeft:10}}>{name}</Text>
+          <View style={{flexDirection:'row'}}>
+          <Text style={{flex:1,fontWeight:'bold',color:"#4E342E",marginLeft:10}}>{name}</Text>
+          {this.renderStatus(status)}
+          </View>
         }
         avatar={require('../img/pretty.png')}
         subtitle={
