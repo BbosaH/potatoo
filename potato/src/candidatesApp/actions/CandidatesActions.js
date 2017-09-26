@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesActions.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-18T15:22:21+03:00
+ * @Last modified time: 2017-09-26T10:30:53+03:00
  */
 
 
@@ -29,6 +29,26 @@ export const candidateStatusUpdate = ({prop,value,candidate_id}) => {
 
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/candidates/${uid}/status`)
+      .set(value)
+      .then(() => {
+
+        dispatch({
+          type: CANDIDATE_STATUS_UPDATE,
+          payload: {prop, value}
+        })
+
+      })
+  };
+
+};
+
+export const candidateRatingUpdate = ({prop,value,candidate_id,oldRating}) => {
+ //later will use oldrating and the new rating to calculate a final rating
+  const {currentUser} = firebase.auth();
+  const uid = candidate_id;
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/candidates/${uid}/rating`)
       .set(value)
       .then(() => {
 
@@ -82,6 +102,7 @@ export const candidateCreate = ({
                                   courses,
                                   details,
                                   status,
+                                  rating,
                                   education,
                                 }) => {
 
@@ -107,6 +128,7 @@ export const candidateCreate = ({
               courses,
               details,
               status,
+              rating,
               education
             })
             .then(() => {

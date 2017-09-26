@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: ListItem.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-24T14:33:56+03:00
+ * @Last modified time: 2017-09-26T10:00:18+03:00
  */
 
 
@@ -15,7 +15,8 @@
  */
 import React, {Component} from 'React';
 import {Text, View, TouchableWithoutFeedback} from 'react-native';
-import { List, ListItem } from 'react-native-elements'
+import { List, ListItem } from 'react-native-elements';
+import StarRating from 'react-native-star-rating';
 
 
 
@@ -23,11 +24,17 @@ class ListRow extends Component {
   // onRowPress() {
   //   this.props.navigation.navigate('CandidatePreview')
   //
+  constructor(props){
+    super(props);
+    this.state={
+      starCount: 3.5
+    }
+  }
 
 
   render() {
 
-    const {name, status, level, salary} = this.props.candidate;
+    const {name, status, level, salary,rating} = this.props.candidate;
 
     onCPress=(candidate)=>{
 
@@ -42,7 +49,28 @@ class ListRow extends Component {
         roundAvatar
         title={name}
         avatar={require('../img/pretty.png')}
-        subtitle={level.value+'  '+status}
+        subtitle={
+
+          <View style={{width:100,marginLeft:10}}>
+
+            <StarRating
+
+              disabled={false}
+              emptyStar={'ios-star-outline'}
+              fullStar={'ios-star'}
+              halfStar={'ios-star-half'}
+              iconSet={'Ionicons'}
+              starSize={20}
+              maxStars={5}
+              rating={rating}
+              starColor={'#4E342E'}
+              emptyStarColor={'#4E342E'}
+              style={{width:70}}
+
+            />
+          </View>
+
+      }
 
         >
 

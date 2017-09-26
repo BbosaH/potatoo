@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatePreview.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-24T23:34:15+03:00
+ * @Last modified time: 2017-09-26T10:32:09+03:00
  */
 
 
@@ -17,13 +17,21 @@ import React, {Component} from 'react';
 import {Text, View, ScrollView} from 'react-native';
 import {PreviewText, PreviewHyperlink} from '../components';
 import {connect} from 'react-redux';
-import {candidateUpdate,candidateStatusUpdate,candidateCreate} from '../actions/CandidatesActions'
+import {candidateUpdate,candidateRatingUpdate,candidateStatusUpdate,candidateCreate} from '../actions/CandidatesActions'
 import styles from '../styles'
 import { Card, ListItem, Button,Icon } from 'react-native-elements'
+import StarRating from 'react-native-star-rating'
 
 
 
 class CandidatesPreview extends Component {
+
+  constructor(props){
+    super(props);
+    this.state={
+      starCount: 3.5
+    }
+  }
   static navigationOptions = ({navigation}) => {
     const {navigate} = navigation;
 
@@ -48,26 +56,54 @@ class CandidatesPreview extends Component {
     }
   }
 
+  onStarRatingPress(rating,candidate_uid,old_rating) {
+    this.setState({
+      starCount: rating
+    },()=>{
+      //code to be here
+      this.props.candidateRatingUpdate({prop:'rating',value:rating,
+        candidate_id:candidate_uid, oldRating:old_rating})
+    });
+  }
+
   render() {
 
     const { params } = this.props.navigation.state;
     console.log("Cmon naawe The params are",params);
-
+    const namePlace ="full name : "
     return (
 
       <View style={{backgroundColor:'#D7CCC8'}}>
         <ScrollView style={{alignSelf: 'stretch'}}>
           <Card
-            title={params.candidate.name}
+            title={namePlace+params.candidate.name}
             image={require('../img/kenshy.png')}
 
             >
             <ListItem
               title={
-              <View style={{flexDirection:'row'}}>
-                <Text style={{flex:1, fontWeight:'bold'}}>Name</Text>
-                <Text style={{flex:1, fontWeight:'bold'}}>{params.candidate.name}</Text>
-              </View>
+                <Text style={{fontWeight:'bold'}}>Rate Application</Text>
+              }
+              subtitle={
+                <View style={{width:150}}>
+
+                  <StarRating
+
+                    disabled={false}
+                    emptyStar={'ios-star-outline'}
+                    fullStar={'ios-star'}
+                    halfStar={'ios-star-half'}
+                    iconSet={'Ionicons'}
+                    starSize={30}
+                    maxStars={5}
+                    rating={params.candidate.rating}
+                    selectedStar={(rating) => this.onStarRatingPress(rating,params.candidate.uid,params.candidate.rating)}
+                    starColor={'#4E342E'}
+                    emptyStarColor={'#4E342E'}
+                    style={{width:70}}
+
+                  />
+                </View>
               }
             />
             <ListItem
@@ -314,4 +350,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {candidateUpdate, candidateStatusUpdate,candidateCreate})(CandidatesPreview);
+export default connect(mapStateToProps, {candidateUpdate,candidateRatingUpdate,candidateStatusUpdate,candidateCreate})(CandidatesPreview);

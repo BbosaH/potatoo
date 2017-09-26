@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesReducer.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-18T14:00:21+03:00
+ * @Last modified time: 2017-09-26T09:58:37+03:00
  */
 
 
@@ -33,6 +33,7 @@ INITIAL_STATE = {
   courses: '',
   details: '',
   status: 'New',
+  rating:0,
   education: '',
 };
 

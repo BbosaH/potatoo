@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-24T14:52:55+03:00
+ * @Last modified time: 2017-09-26T10:05:27+03:00
  */
 
 
@@ -152,7 +152,7 @@ class CandidatesForm extends Component {
       this.setState({
           emailError:"",
           emailSpaceHeight:5
-      });
+      }); //deliberately coded like this..
       this.props.candidateUpdate({prop: 'email', value: text})
     }else{
 
