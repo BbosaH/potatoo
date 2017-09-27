@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-27T12:01:06+03:00
+ * @Last modified time: 2017-09-27T12:06:11+03:00
  */
 
 
@@ -283,7 +283,7 @@ class CandidatesForm extends Component {
              <View style={{flex:2}}>
                 <Image
                   styleName="medium-avatar"
-                  source={require('../img/pretty.png')}
+                  source={require('../img/joe.png')}
                 />
              </View>
 

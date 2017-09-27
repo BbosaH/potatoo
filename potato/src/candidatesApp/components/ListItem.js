@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: ListItem.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-26T11:38:36+03:00
+ * @Last modified time: 2017-09-27T12:08:13+03:00
  */
 
 
@@ -88,7 +88,7 @@ class ListRow extends Component {
           {this.renderStatus(status)}
           </View>
         }
-        avatar={require('../img/pretty.png')}
+        avatar={require('../img/joe.png')}
         subtitle={
 
           <View style={{width:100,marginLeft:10}}>
