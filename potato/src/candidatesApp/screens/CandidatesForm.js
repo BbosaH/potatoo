@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-27T12:06:11+03:00
+ * @Last modified time: 2017-09-27T23:29:56+03:00
  */
 
 
@@ -331,7 +331,7 @@ class CandidatesForm extends Component {
               onOptionSelected={(level) => this.updateLevel(level)}
               titleProperty="title"
               valueProperty="value"
-            />
+             />
 
              <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
               <TextInput

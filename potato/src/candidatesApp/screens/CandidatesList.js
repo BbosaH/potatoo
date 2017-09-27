@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesList.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-24T23:22:59+03:00
+ * @Last modified time: 2017-09-28T00:29:53+03:00
  */
 
 
@@ -16,9 +16,12 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
 import {Text, View,  ListView} from 'react-native';
-import {List,Button,Icon,SearchBar} from 'react-native-elements'
+import {List,Button,Icon,SearchBar,Badge} from 'react-native-elements'
 import {connect} from 'react-redux';
 import {candidatesFetch, candidatePreviewNavigate} from '../actions';
+import {DropDownMenu} from '@shoutem/ui'
+
+
 //import {ListItem} from '../common'
 //import ListItemRedux from './ListItemREDUX'
 //import {ListItemConst} from './ListItemConst'
@@ -36,7 +39,10 @@ class CandidatesList extends Component {
          //console.log("The porpsddoo are",this.props);
          this.state = {
            candidates: [],
-           fullCandidates:[]
+           fullCandidates:[],
+           sortOptions:[
+             {title:'alpha', value: 'alpha'}
+           ]
          }
   }
 
@@ -117,13 +123,35 @@ class CandidatesList extends Component {
 
   }
 
+  sortItems(item){
+    let allCandidates = this.state.fullCandidates
+
+      allCandidates=allCandidates.sort((a,b)=>{
+          if (a.name < b.name)
+            return -1;
+          if (a.name > b.name)
+            return 1;
+          return 0;
+      });
+
+      this.setState((prevState)=>{
+        return {...prevState, candidates:allCandidates}
+      },()=>{
+        console.log("updates");
+        this.createDataSource(this.state)
+        this.forceUpdate();
+        console.log("The state is happened=>",this.state);
+      });
+
+  }
+
   render() {
 
     const {navigate} = this.props.navigation;
 
     const goTo=(candidate)=>{
 
-          navigate('CandidatePreview',{candidate})
+          navigate('CandidatePreview',{candidate});
     }
 return (
       <View style={{backgroundColor: '#D7CCC8'}}>
@@ -134,6 +162,18 @@ return (
           placeholder='Search Candidate...'
           onChangeText={text=>this.filterItems(text)}
          />
+
+       <View style={{marginTop: 15}}/>
+
+
+
+
+          <Badge
+            onPress={() => this.sortItems()}
+            containerStyle={{ backgroundColor:'#4A148C',width:150,marginLeft:10}}
+            >
+              <Text style={{fontWeight:'normal',color:"#e2e2e2"}}>sort candidates</Text>
+           </Badge>
 
 
         <List>
