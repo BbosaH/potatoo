@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: CandidatesForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-26T11:46:44+03:00
+ * @Last modified time: 2017-09-27T12:01:06+03:00
  */
 
 
@@ -22,9 +22,10 @@ import {candidateUpdate,candidateCreate,candidatesFetch,levelsFetch} from '../ac
 // import {candidatesFetch, candidatePreviewNavigate} from '../actions/CandidatesActions';
 
 import styles from '../styles'
-import { TextInput,Text,View,DropDownMenu} from '@shoutem/ui'
+import { TextInput,Text,View,DropDownMenu,Image} from '@shoutem/ui'
 import { FormLabel,FormValidationMessage,Button,Icon,SearchBar} from 'react-native-elements'
 import {NUM_REG_EXP,EMAIL_REG_EXP,TIMEZONE_REG_EXP} from '../settings/settings'
+
 
 
 
@@ -268,6 +269,29 @@ class CandidatesForm extends Component {
         <ScrollView style={{alignSelf: 'stretch'}}>
 
           <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
+           <View style={{flexDirection:"row"}}>
+             <View style={{flex:1}}>
+               <View style={{marginTop:50,marginLeft:20}}>
+               <Icon
+                  raised
+                  name='camera'
+                  type='font-awesome'
+                  color='#4E342E'
+                  onPress={() => console.log('hello')} />
+              </View>
+            </View>
+             <View style={{flex:2}}>
+                <Image
+                  styleName="medium-avatar"
+                  source={require('../img/pretty.png')}
+                />
+             </View>
+
+          </View>
+
+
+
+          <View style={{height:5,backgroundColor:"#D7CCC8"}}/>
           <TextInput
             inputStyle={inputStyle}
             placeholder="name"
@@ -302,7 +326,6 @@ class CandidatesForm extends Component {
 
               <DropDownMenu
               styleName="horizontal"
-              style={inputStyle}
               options={this.state.levels}
               selectedOption={this.state.selectedLevel ? this.state.selectedLevel : this.state.levels[0]}
               onOptionSelected={(level) => this.updateLevel(level)}
@@ -439,7 +462,7 @@ class CandidatesForm extends Component {
           <View style={{margin: 10, flex: 1}}>
 
             <Button
-              onPress={this.onButtonPress.bind(this)}
+            onPress={this.onButtonPress.bind(this)}
             raised
             icon={{name: 'cached'}}
             backgroundColor="#3E2723"

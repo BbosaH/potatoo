@@ -5,7 +5,7 @@
  * @Project: potato
  * @Filename: RegisterForm.js
  * @Last modified by:   magicwand
- * @Last modified time: 2017-09-24T15:27:04+03:00
+ * @Last modified time: 2017-09-27T11:54:53+03:00
  */
 
 
@@ -15,13 +15,14 @@
  */
 import React, {Component} from 'react';
 import {Text, View, Dimensions, Image} from 'react-native';
-import { TextInput } from '@shoutem/ui'
+import { TextInput,Spinner } from '@shoutem/ui'
 // import { Form, FormItem } from 'react-native-form-validation';
-import {ContainerSection, Input, Spinner} from '../components';
+import {ContainerSection, Input} from '../components';
 import {connect} from 'react-redux';
 import {emailChanged, passwordChanged, loginUser, registerUser} from '../actions/AuthActions'
 import { Button } from 'react-native-elements'
 import styles from '../styles'
+
 
 import {EMAIL_REG_EXP} from '../settings/settings';
 
@@ -102,6 +103,18 @@ class LoginFormEmail extends Component {
     )
   }
 
+  renderSpinner()
+  {
+
+    if (this.props.registrationLoading || this.props.loading) {
+      return <Spinner
+             style={{color:"#4E342E",size:'large'}}
+             />
+    }
+    return;
+
+  }
+
   renderRegistrationButton() {
     if (this.props.registrationLoading) {
       return <Spinner size="large"/>
@@ -131,6 +144,11 @@ class LoginFormEmail extends Component {
     return (
       <View style={{width:containerFullwidth,backgroundColor: '#BCAAA4',flexDirection  : 'column',
       justifyContent: 'center',height:containerHeight}}>
+
+
+          {this.renderSpinner()}
+          <View style={{height:5}}/>
+
           <Image
           styleName="small"
           source={require('../img/app_logo.png')}
@@ -173,6 +191,9 @@ class LoginFormEmail extends Component {
                       buttonStyle={loginButtonStyle}
                       onPress={this.onRegisterButtonPress.bind(this)}
                       />
+
+
+
       </View>
     )
   }
